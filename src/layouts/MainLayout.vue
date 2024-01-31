@@ -58,7 +58,7 @@
 
   <q-footer >
     <div class="bg-accent row justify-center full-width">
-      <div class="container">    
+      <div class="container">
         <div class="row items-center justify-between q-pt-xl full-width ">
           <div class="col-xs-12 col-sm-auto col-md q-py-md text-center">
               <q-img
@@ -69,7 +69,7 @@
                   spinner-size="82px"
               />
           </div>
-  
+
           <div class="col-xs-12 col-sm-auto q-py-md row items-center justify-center">
               <EssentialLink
                 v-for="link in linksList"
@@ -78,16 +78,19 @@
               />
           </div>
         </div>
-        <div class="row items-center justify-between q-pt-xl full-width">
-          <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="email" /><a class="q-ml-md" href="mailto:contatct@voltolini.com.br">contatct@voltolini.com.br</a></div>
-          <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="call" /><a class="q-ml-md" href="tel:+19414486093">+1 941 448-6093</a></div>
-          <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="email" /><a class="q-ml-md" href="https://maps.app.goo.gl/w3cEzLPA9B3wqNYY6">1950 Whitfield Park Drive, A-2, Sarasota, FL 34243, United States</a></div>
-  
-          <div class="col-xs-12 col-sm-auto text-left q-py-md column q-my-md">
+        <div class="row items-start justify-between q-pt-xl full-width">
+          <div>
+            <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="email" /><a class="q-ml-md" href="mailto:info@qualityuph.com">info@qualityuph.com</a></div>
+            <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="email" /><a class="q-ml-md" href="mailto:services@qualityuph.com">services@qualityuph.com</a></div>
+          </div>
+          <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="call" /><a class="q-ml-md" href="tel:+19414486093">+1 (941) 448-6093</a></div>
+          <div class="col-xs-10 col-sm-auto q-my-md"><q-icon size="sm" name="room" /><a class="q-ml-md" href="https://maps.app.goo.gl/oADKVUkxx48GJx5B7">1950 Whitfield Park Dr unit A-2, Sarasota, FL 34243, Estados Unidos</a></div>
+
+          <div class="col-xs-12 col-sm-auto text-left q-pb-md column q-mb-md">
             <h6 class="q-pa-none q-ma-none q-my-md">follow us</h6>
             <div class="col-12">
               <q-list class="row items-center justify-center q-gutter-md">
-                <div clickable v-for="(item, i) in social" :key="i" @click="onRouter(item)" >
+                <div clickable v-for="(item, i) in social" :key="i" @click="onRouter(item)" class="cursor-pointer" >
                   <div>
                     <q-img
                       :src="item.img"
@@ -113,76 +116,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { useGlobalStore } from '../stores/globalStore'
-import { useRoute } from 'vue-router'
+import { openURL } from 'quasar'
 
 const global = useGlobalStore()
 const leftDrawerOpen = ref(false)
-const route = useRoute()
 
 const mobile = computed(() => global.mobile)
-const isHeight = computed(() => {
-  return mobile?'90vh':'650px'
-})
-
-const isPage = computed(() => {
-  switch (route.name) {
-    case 'home':
-      return {
-        img: 'https://cdn.quasar.dev/img/parallax1.jpg',
-        height: isHeight.value,
-        title: 'Working to make your dream renovations com true',
-        link: 'home',
-        btn: true,
-        logo: true
-      }
-
-    case 'about':
-      return {
-        img: null,
-        height: null,
-        title: 'About Us',
-        link: 'about',
-        btn: false,
-        logo: false
-      }
-    
-    case 'services':
-      return {
-        img: null,
-        height: null,
-        title: 'Services',
-        link: 'services',
-        btn: false,
-        logo: false
-      }
-      
-    case 'contact':
-      return {
-        img: 'https://cdn.quasar.dev/img/quasar.jpg',
-        height: '412px',
-        title: 'Contact Us',
-        link: 'contact',
-        btn: false,
-        logo: false
-      }
-      
-    case 'gallery':
-      return {
-        img: 'https://cdn.quasar.dev/img/quasar.jpg',
-        height: '412px',
-        title: 'Portfólio',
-        link: 'gallery',
-        btn: false,
-        logo: false
-      }
-  
-    default:
-      break;
-  }
-})
 
 const linksList = ref([
   {
@@ -205,29 +147,35 @@ const linksList = ref([
     title: 'Contact Us',
     link: 'contact'
   }
-  
+
 ])
 
 const social = ref([
   {
-    img: 'https://firebasestorage.googleapis.com/v0/b/voltolinihome-ac267.appspot.com/o/social%2Fwhatsapp.png?alt=media&token=f7673096-13cc-4c84-bba8-555b65960a65',
-    link: 'https://api.whatsapp.com/send?phone=5521972965424'
+    img: 'https://firebasestorage.googleapis.com/v0/b/quality-upholstery.appspot.com/o/social%2Ffacebook_200x200.webp?alt=media&token=c6d6093e-62ad-430a-92fb-7ebd87a74e82',
+    link: 'https://www.facebook.com/qualityupholsteryfl?mibextid=LQQJ4d'
   },
   {
-    img: 'https://firebasestorage.googleapis.com/v0/b/voltolinihome-ac267.appspot.com/o/social%2Ffacebook.png?alt=media&token=669fc201-38a1-43d8-ac15-f197ac99b574',
-    link: 'https://www.facebook.com/voltolinihome/'
+    img: 'https://firebasestorage.googleapis.com/v0/b/quality-upholstery.appspot.com/o/social%2Finstagram_200x200.webp?alt=media&token=8d819eda-1373-4ae5-bcc1-465f4855673b',
+    link: 'https://www.instagram.com/qualityupholsteryfl?igsh=bWdkeGhkcWhvampm'
   },
   {
-    img: 'https://firebasestorage.googleapis.com/v0/b/voltolinihome-ac267.appspot.com/o/social%2Finstagram.png?alt=media&token=1a56ea6d-4e3e-4870-8ef8-aa456a4180f3',
-    link: 'https://www.instagram.com/voltolinihome/'
+    img: 'https://firebasestorage.googleapis.com/v0/b/quality-upholstery.appspot.com/o/social%2Fsms_200x200.webp?alt=media&token=4b0a021e-cae5-4746-9551-c5a9485ac2a6',
+    link: 'sms:+19414486093'
   },
 ])
 
-
+function onRouter(item) {
+  openURL(item.link)
+}
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+onMounted(() => {
+  global.getCollection('listaTestemunho')
+})
 
 </script>
 

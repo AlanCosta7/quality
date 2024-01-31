@@ -61,7 +61,6 @@
 
     return global.listaGaleria
   })
-  console.log('listaGaleria', lista.value)
   
   </script>
   

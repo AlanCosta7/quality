@@ -1,7 +1,7 @@
 <template>
   <q-card flat class="transparent" style="width: 324px; border: none;">
     <div class="text-center">
-        <img width="200px" :src="img">
+        <img width="200px" height="200px" :src="img">
     </div>
     <q-card-section>
         <div class="text-h6 text-weight-bold text-white text-center">{{ title }}</div>

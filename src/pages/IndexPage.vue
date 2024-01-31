@@ -35,7 +35,7 @@
         <h2 class="p1">Furniture Upholstery or Reupholstery done by the Experts with years of experience.</h2>
       </div>
       <div class="q-ma-lg">
-        <q-list class="row items-end justify-center q-gutter-xl">
+        <q-list class="row items-start justify-center q-gutter-xl">
           <card v-for="(item, i) in listaServices" :key="i" :title="item.title"  :subtitle="item.text" :img="item.icon" />
         </q-list>
       </div>
@@ -52,7 +52,7 @@
 
       </q-parallax>
     </section>
- 
+
     <section class="bg-white q-pa-xl">
       <div>
         <div><h6 class="p1 text-primary text-center">we proudly carry fabrics from:</h6></div>
@@ -80,11 +80,11 @@
         control-color="white"
         padding
         arrows
-        height="456px"
+        :height="mobile?'700px':'480px'"
         class="bg-secondary text-white shadow-1 rounded-borders"
       >
         <q-carousel-slide v-for="(item, i) in listaTestemunho" :key="i" :name="i" class="column no-wrap flex-center">
-          <div class="q-ma-lg text-center">
+          <div class=" text-center">
            {{ item.text }}
           </div>
           <div class="q-mt-md text-center">
@@ -98,7 +98,7 @@
            {{ item.name }}
           </div>
         </q-carousel-slide>
-       
+
       </q-carousel>
     </section>
 
@@ -131,7 +131,7 @@ const listaImg = ref([
 ])
 
 function onClick() {
-  
+
   router.push({ name: "contact" });
 }
 

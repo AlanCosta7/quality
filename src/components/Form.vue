@@ -15,7 +15,7 @@
         </div>
       </div>
       <div>
-          <q-input bg-color="white" dense lazy-rules :rules="[val => (val && val.length > 0) || 'What is your email?']" color="positive" outlined v-model="form.email" type="email" label="Email:" />
+          <q-input bg-color="white" dense lazy-rules :rules="[val => (val && val.length > 0) || 'What is your email?']" color="positive" outlined v-model="form.isEmail" type="email" label="Email:" />
       </div>
       <div>
           <q-input bg-color="white" dense lazy-rules :rules="[val => (val && val.length > 0) || 'How can we help you?']" color="positive" outlined v-model="form.msg" type="textarea" label="Tell us a little bit about your project:" />
@@ -29,18 +29,36 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useGlobalStore } from '../stores/globalStore'
 const global = useGlobalStore()
 
 let form = ref({
   name: '',
+  subject: '',
   tel: '',
   email: '',
+  isEmail: '',
   msg: '',
+  text: '',
+  html: '',
 })
 
 async function onSubmit() {
+  form.value.subject = `Contact - ${form.value.name}`
+  form.value.text = `Name: ${form.value.name}, Tel: ${form.value.tel}, Email: ${form.value.isEmail}, Mensagem: ${form.value.msg}`
+  form.value.html = `
+    <p>Name: ${form.value.name}</p>
+    <p>Tel: ${form.value.tel}</p>
+    <p>Email: ${form.value.isEmail}</p>
+    <p>Mensagem: ${form.value.msg}</p>
+  `
+
+  form.value.email = [
+    'services@qualityuph.com',
+    form.value.isEmail
+  ]
+
   let val = {
     functions: 'sendContato',
     data: form.value
@@ -67,9 +85,11 @@ async function onSubmit() {
 function onReset() {
   form.value = {
     name: '',
+    subject: '',
     tel: '',
     email: '',
-    msg: '',
+    text: '',
+    html: '',
   }
 }
 
